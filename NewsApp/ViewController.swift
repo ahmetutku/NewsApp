@@ -122,7 +122,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        //get topStories fonkisyonunu çağır
+            //get topStories fonkisyonunu çağır
+        //APICaller.shared.getTopStories(completion: <#T##(Result<[Article], Error>) -> Void#>)
     }
 }
 
