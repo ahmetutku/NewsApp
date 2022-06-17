@@ -123,7 +123,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
             //get topStories fonkisyonunu çağır
-        //APICaller.shared.getTopStories(completion: <#T##(Result<[Article], Error>) -> Void#>)
+        APICaller.shared.getTopStories { [weak self] result in
+            switch result{//dolar 0 first arguman demek oluyor ++ imageURL'e empty string verdik
+                case .success(let articles):
+                    self?.articles = articles
+                    self?.viewModels = articles.compactMap({
+                        NewsTableViewCellViewModel(
+                            title: $0.title,
+                            subtitle: $0.description ?? "No Description",
+                            imageURL: URL(string: $0.urlToImage ?? "")
+                        )
+                })
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()//tells it to return itself
+                }
+                case .failure(let error):
+                    print(error)
+                
+            }
+        }
     }
 }
 
