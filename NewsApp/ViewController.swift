@@ -79,7 +79,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.configure(with: viewModels[indexPath.row])
         return cell
     }
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {//deselect checkbox seçimini kaldırmak için
         tableView.deselectRow(at: indexPath, animated: true)
         let article = articles[indexPath.row]
         
@@ -116,9 +116,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 case .failure(let error):
                     print(error)
                 
-            }
+            }//return için cancellı özelleştir (cancel'a basılıdğında ana sayfaya dönsün)
         }
         print(text)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        //get topStories fonkisyonunu çağır
     }
 }
 
