@@ -12,7 +12,6 @@ import SafariServices//to present the news asrticles
 //API Caller
 //Open the News Story
 //Search for the news story
-
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     private let tableView: UITableView = {
@@ -46,7 +45,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         NewsTableViewCellViewModel(
                             title: $0.title,
                             subtitle: $0.description ?? "No Description",
-                            imageURL: URL(string: $0.urlToImage ?? "")
+                            imageURL: URL(string: $0.urlToImage ?? ""),
+                            publishedAt: $0.publishedAt
                         )
                 })
                 DispatchQueue.main.async {
@@ -107,7 +107,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         NewsTableViewCellViewModel(
                             title: $0.title,
                             subtitle: $0.description ?? "No Description",
-                            imageURL: URL(string: $0.urlToImage ?? "")
+                            imageURL: URL(string: $0.urlToImage ?? ""),
+                            publishedAt: $0.publishedAt
                         )
                 })
                 DispatchQueue.main.async {
@@ -131,7 +132,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         NewsTableViewCellViewModel(
                             title: $0.title,
                             subtitle: $0.description ?? "No Description",
-                            imageURL: URL(string: $0.urlToImage ?? "")
+                            imageURL: URL(string: $0.urlToImage ?? ""),
+                            publishedAt: $0.publishedAt
                         )
                 })
                 DispatchQueue.main.async {
@@ -144,4 +146,3 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
 }
-

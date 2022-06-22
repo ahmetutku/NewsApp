@@ -6,24 +6,6 @@
 //
 
 import UIKit
-/*class NewsTableViewCellViewModel{//class so it can later be altered but you need an initilializer for classes
-    let title: String//bunu al
-    let subtitle: String
-    let imageURL: URL?
-    var imageData: Data? = nil
-    
-    init(
-        title: String,
-        subtitle: String,
-        imageURL: URL?
-
-    ){//initilizers require a body
-        self.title = title
-        self.subtitle = subtitle
-        self.imageURL = imageURL
-        //do not need to assign casue it is going to start at nill
-    }
-}*/
 
 class NewsTableViewCell: UITableViewCell {
 
@@ -44,6 +26,13 @@ class NewsTableViewCell: UITableViewCell {
         return label
     }()
     
+    private let dateLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 10, weight: .ultraLight)
+        label.numberOfLines = 0
+        return label
+    }()
+    
     private let newsImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .secondarySystemBackground
@@ -53,11 +42,13 @@ class NewsTableViewCell: UITableViewCell {
         return imageView
     }()
     
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(newsTitleLabel)
         contentView.addSubview(subtitleLabel)
         contentView.addSubview(newsImageView)
+        contentView.addSubview(dateLabel)
     }
     
     required init?(coder: NSCoder) {
@@ -81,6 +72,11 @@ class NewsTableViewCell: UITableViewCell {
                                       y: 5,
                                       width: 145,
                                       height: contentView.frame.size.height - 10)
+        
+        dateLabel.frame = CGRect(     x: 10,
+                                      y: 30,
+                                      width: contentView.frame.size.width - 170,
+                                      height: contentView.frame.size.height/2)
     }
     
     //the youtube man said this idk
@@ -91,11 +87,13 @@ class NewsTableViewCell: UITableViewCell {
         newsTitleLabel.text = nil
         subtitleLabel.text = nil
         newsImageView.image = nil
+        dateLabel.text = nil
     }
     
     func configure(with viewModel: NewsTableViewCellViewModel){
         newsTitleLabel.text = viewModel.title
         subtitleLabel.text = viewModel.subtitle
+        dateLabel.text = viewModel.publishedAt
         
         //Image
         if let data = viewModel.imageData{
@@ -114,5 +112,5 @@ class NewsTableViewCell: UITableViewCell {
             }.resume()
         }
     }
-    
+   
 }

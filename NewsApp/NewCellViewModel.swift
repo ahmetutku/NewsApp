@@ -13,16 +13,21 @@ class NewsTableViewCellViewModel{//class so it can later be altered but you need
     let subtitle: String
     let imageURL: URL?
     var imageData: Data? = nil
+    let publishedAt: String
+    
     
     init(
         title: String,
         subtitle: String,
-        imageURL: URL?
+        imageURL: URL?,
+        publishedAt: String
+      
 
     ){//initilizers require a body
         self.title = title
         self.subtitle = subtitle
         self.imageURL = imageURL
-        //do not need to assign casue it is going to start at nill
+        self.publishedAt = publishedAt
+
     }
 }
