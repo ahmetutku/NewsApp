@@ -8,8 +8,11 @@
 import UIKit
 
 class NewsTableViewCell: UITableViewCell {
+    
+    var link: ViewController?
 
     static let identifier = "NewTableViewCell"
+    
     
     private let newsTitleLabel: UILabel = {
         let label = UILabel()
@@ -42,6 +45,19 @@ class NewsTableViewCell: UITableViewCell {
         return imageView
     }()
     
+    private let starButton: UIButton = {
+        let starButton = UIButton()
+        starButton.setImage(UIImage(systemName: "heart"),for: .normal)
+        starButton.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        starButton.tintColor = .systemBlue
+        starButton.addTarget(self, action: #selector(markAsFavorite), for: .touchUpInside)
+        return starButton
+    }()
+    
+    @objc private func markAsFavorite(){
+        print("Marking as Favorite")
+        link?.methodCalled(cell: self)
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -49,6 +65,10 @@ class NewsTableViewCell: UITableViewCell {
         contentView.addSubview(subtitleLabel)
         contentView.addSubview(newsImageView)
         contentView.addSubview(dateLabel)
+        contentView.addSubview(starButton)
+        
+     
+        
     }
     
     required init?(coder: NSCoder) {
@@ -77,6 +97,10 @@ class NewsTableViewCell: UITableViewCell {
                                       y: 30,
                                       width: contentView.frame.size.width - 170,
                                       height: contentView.frame.size.height/2)
+        
+        starButton.frame = CGRect(x: 350, y: 0, width: 50, height: 50)
+        
+        
     }
     
     //the youtube man said this idk
@@ -88,6 +112,7 @@ class NewsTableViewCell: UITableViewCell {
         subtitleLabel.text = nil
         newsImageView.image = nil
         dateLabel.text = nil
+        
     }
     
     func configure(with viewModel: NewsTableViewCellViewModel){

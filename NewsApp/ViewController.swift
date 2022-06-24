@@ -14,6 +14,16 @@ import SafariServices//to present the news asrticles
 //Search for the news story
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
+    //use custom delegetion properly not this ig
+    func methodCalled(cell: UITableViewCell){
+        //figures out which link is clicked
+        let clicked = tableView.indexPath(for: cell)
+        print(clicked)
+        //creaate an array where whn clicked it stores the titles etc
+        let title = articles[clicked!.section].title
+        print(title)
+    }
+    
     private let tableView: UITableView = {
         let table = UITableView()
         table.register(NewsTableViewCell.self,
@@ -76,6 +86,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier, for: indexPath) as? NewsTableViewCell else{
             fatalError()
         }
+        cell.link = self
         cell.configure(with: viewModels[indexPath.row])
         return cell
     }

@@ -14,6 +14,7 @@ class NewsTableViewCellViewModel{//class so it can later be altered but you need
     let imageURL: URL?
     var imageData: Data? = nil
     let publishedAt: String
+    //let isFaved: Bool
     
     
     init(
@@ -21,6 +22,7 @@ class NewsTableViewCellViewModel{//class so it can later be altered but you need
         subtitle: String,
         imageURL: URL?,
         publishedAt: String
+       // isFaved: Bool
       
 
     ){//initilizers require a body
@@ -28,6 +30,7 @@ class NewsTableViewCellViewModel{//class so it can later be altered but you need
         self.subtitle = subtitle
         self.imageURL = imageURL
         self.publishedAt = publishedAt
+        //self.isFaved = isFaved
 
     }
 }
