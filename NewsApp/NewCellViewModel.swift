@@ -14,7 +14,8 @@ class NewsTableViewCellViewModel{//class so it can later be altered but you need
     let imageURL: URL?
     var imageData: Data? = nil
     let publishedAt: String
-    //let isFaved: Bool
+    //let id
+    //var isFaved: Bool? = false
     
     
     init(
@@ -22,7 +23,7 @@ class NewsTableViewCellViewModel{//class so it can later be altered but you need
         subtitle: String,
         imageURL: URL?,
         publishedAt: String
-       // isFaved: Bool
+        //isFaved: Bool
       
 
     ){//initilizers require a body
@@ -33,4 +34,9 @@ class NewsTableViewCellViewModel{//class so it can later be altered but you need
         //self.isFaved = isFaved
 
     }
+}
+//id oluştur favorilediğin zaman hepsini al core dataya yaz sonra tıklayınca çek
+struct Faved{
+    var isFaved: Bool
+    let newsModel: Article
 }

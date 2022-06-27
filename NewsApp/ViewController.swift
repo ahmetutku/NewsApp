@@ -4,7 +4,6 @@
 //
 //  Created by Ahmet Hamamcioglu on 14.06.2022.
 //
-
 import UIKit
 import SafariServices//to present the news asrticles
 //Table View
@@ -14,14 +13,26 @@ import SafariServices//to present the news asrticles
 //Search for the news story
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
+    
+    /*  1- copy the Article array to another array
+        2- add bool alreadyFaved
+        3- set the alreadyFaved into false
+     */
+    
+    var favedArrays: [Faved] = []
+    
+    
     //use custom delegetion properly not this ig
     func methodCalled(cell: UITableViewCell){
+
         //figures out which link is clicked
         let clicked = tableView.indexPath(for: cell)
-        print(clicked)
+        print(clicked?.row)
         //creaate an array where whn clicked it stores the titles etc
-        let title = articles[clicked!.section].title
+        let title = articles[clicked!.row ].title
+        //var alreadyFaved = articles[clicked!.row].favorited
         print(title)
+
     }
     
     private let tableView: UITableView = {
@@ -67,6 +78,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
             }
         }
+    
     }
     private func createSearchBar(){
         navigationItem.searchController = searchVC
@@ -147,6 +159,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             publishedAt: $0.publishedAt
                         )
                 })
+                
+                if let articlesData = self?.articles {
+                    for article in articlesData {
+                        self.favedArrays.append(.init(isFaved: false, newsModel: article))
+                    }
+                    print(self.favedArrays.count)
+                }
+                
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()//tells it to return itself
                 }

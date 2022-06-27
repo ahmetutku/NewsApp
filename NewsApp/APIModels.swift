@@ -9,6 +9,7 @@ import Foundation
 
 struct APIResponse: Codable {//bunların hepsini API diye bir klasöre koy ve modelleri ayrı koy
     let articles: [Article]
+    
 }
 
 struct Article: Codable{
@@ -18,9 +19,13 @@ struct Article: Codable{
     let urlToImage: String?
     let publishedAt: String
     let source: Source
+    //var favorited: Bool = false
     
 }
+
 
 struct Source: Codable {
     let name: String
 }
+
+
